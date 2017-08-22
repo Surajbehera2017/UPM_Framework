@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="SUPPORTING JARS/file-utils.jar"/>
+	<classpathentry kind="lib" path="SUPPORTING JARS/joda-time-2.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="SUPPORTING JARS/joda-time-2.1-sources.jar"/>
+	<classpathentry kind="lib" path="SUPPORTING JARS/joda-time-2.1.jar"/>
+	<classpathentry kind="lib" path="SUPPORTING JARS/jsoup-1.8.3.jar"/>
+	<classpathentry kind="lib" path="SUPPORTING JARS/poi-3.7-20101029.jar"/>
+	<classpathentry kind="lib" path="C:/Users/28891/.m2/repository/com/relevantcodes/extentreports/2.10/extentreports-2.10.jar"/>
+	<classpathentry kind="lib" path="D:/Suraj/AUTOMATION/pdfbox-1.2.0.jar"/>
+	<classpathentry kind="lib" path="D:/Suraj/AUTOMATION/fontbox-1.2.0.jar/fontbox-1.2.0.jar"/>
+	<classpathentry kind="lib" path="D:/Suraj/AUTOMATION/Jars/itextpdf-5.0.6.jar"/>
+	<classpathentry kind="lib" path="D:/Suraj/Selemnium_TC/UPM/SUPPORTING JARS/selenium-server-standalone-2.48.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
