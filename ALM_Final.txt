@@ -1,0 +1,68 @@
+Sub Test_Main(Debug, CurrentTestSet, CurrentTSTest, CurrentRun)
+  On Error Resume Next
+  ' clear output window
+  TDOutput.Clear
+
+
+Write_Text "TC_28_Performance_Of_Partner_Search","D:\Suraj\Selemnium_TC\UPM\TC_NAME.txt"
+
+Write_Text "ALM","D:\Suraj\Selemnium_TC\UPM\Execute_from.txt"
+
+Executor "%comspec% /K D:\Suraj\Selemnium_TC\UPM\EXUCUTER.bat"
+
+ALM_Status=Read_Text ("D:\Suraj\Selemnium_TC\UPM\Execute_from.txt")
+
+  If Read_Text ("D:\Suraj\Selemnium_TC\UPM\Execute_from.txt") = "Pass" Then
+     CurrentRun.Status = "Passed"
+     CurrentTSTest.Status = "Passed"
+  End If
+
+  if Read_Text ("D:\Suraj\Selemnium_TC\UPM\Execute_from.txt") = "fail" Then
+     CurrentRun.Status = "Failed"
+     CurrentTSTest.Status = "Failed"
+  End If
+
+  Dim Result_Location_URL,Result_Location
+ Result_Location = Read_Text ("D:\Suraj\Selemnium_TC\UPM\Result_path.txt")
+ Result_Location_URL= "D:\Suraj\Selemnium_TC\UPM\Report\UPM_Suite\UPM_Suite_HTML\"&Result_Location&".html"
+   TDHelper.UploadAttachment Result_Location_URL , CurrentRun
+  TDHelper.AddStepToRun "Result", Result_Location, "-", "-",ALM_Status
+
+'Dim Shell
+   ' Set Shell = CreateObject("WScript.Shell")
+   ' Shell.Run "%comspec% /K D:\Suraj\Selemnium_TC\UPM\EXUCUTER.bat", 1, True
+  '  Set Shell = Nothing
+
+End Sub
+
+'*******************************************************************
+
+
+Sub Write_Text(Text,path)
+    Dim  fso,oFile
+    Set fso=CreateObject("Scripting.FileSystemObject")
+    Set oFile=fso.OpenTextFile(path,2,true)
+    oFile.Write Text
+    oFile.Close
+    Set oFile = Nothing
+End Sub
+
+function Read_Text(path)
+   Dim  fso,oFile
+   Set fso=CreateObject("Scripting.FileSystemObject")
+   Set oFile=fso.OpenTextFile(path,1,true)
+   Read_Text=oFile.ReadLine
+   oFile.Close
+   set oFile = Nothing
+End Function
+
+
+Sub Executor(filePath)
+   Dim Shell
+    Set Shell = CreateObject("WScript.Shell")
+    Shell.Run filePath , 1, True
+    Set Shell = Nothing
+End Sub
+
+
+'*******************************************************************
