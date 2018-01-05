@@ -31,11 +31,14 @@ import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.relevantcodes.extentreports.LogStatus;
+
 
 @SuppressWarnings("unused")
 public class UPM_Function_Library extends UPM_Page_Library {
@@ -364,7 +367,7 @@ public class UPM_Function_Library extends UPM_Page_Library {
 				Thread.sleep(100);
 			}
 		}
-		Wait_For_Div();
+		//Wait_For_Div();
 		return UPM_Browser_Element1;
 	}
 
@@ -1065,7 +1068,7 @@ public class UPM_Function_Library extends UPM_Page_Library {
 	public static void UPM_Set_Text(String Text_Property, String Text_Val,
 			String Desc) throws Exception {
 		if (!Text_Val.matches("NA")) {
-			Thread.sleep(500);
+			//Thread.sleep(500);
 			Wait_For_Div();
 
 			WebElement UPM_TextBox = null;
@@ -1561,9 +1564,9 @@ public class UPM_Function_Library extends UPM_Page_Library {
 		}
 	}
 
-	public static void UPM_Set_CheckBox(String CheckBox_Pro,
-			String CheckBox_Val, String Desc) throws Exception {
-		Thread.sleep(1000);
+	public static void UPM_Set_CheckBox(String CheckBox_Pro,String CheckBox_Val, String Desc) throws Exception {
+		//Thread.sleep(1000);
+		Wait_For_Div();
 		if (!CheckBox_Val.toString().matches("NA")) {
 			String IsChecked;
 			WebElement UPM_CheckBox = null;
@@ -2844,12 +2847,102 @@ public class UPM_Function_Library extends UPM_Page_Library {
 	}
 
 	public static void Wait_For_Div() throws Exception {
+		//WebDriverWait Wait = new WebDriverWait(ObjDriver, 60);
+		ObjDriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		
+		Activate_Browsers();
+		for(int max_tries=0;max_tries<5;max_tries++)
+		{
 		try 
 		{
-				//WebDriverWait wait = new WebDriverWait(ObjDriver, 60);
-				//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='menu_form_id:loadingPanelContentTable']/tbody/tr/td/img")));
+			if(max_tries!=0)
+			{
+			Thread.sleep(300);
+			}
+			
+			//WebElement ele = ObjDriver.findElement(By.xpath("//table[@id='confClose_Form1:loadingPanelContentTable']//img"));
+			//Wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//table[@id='confClose_Form1:loadingPanelContentTable']//img")));
+			//confClose_Form1:loadingPanelContentDiv
+			for(int wait=0;wait<60;wait++)
+			{
 				
+				WebElement ele = ObjDriver.findElement(By.xpath("//table[@id='confClose_Form1:loadingPanelContentTable']//img"));
+				
+				if(ele.isDisplayed())
+				{
+					Thread.sleep(600);
+				}
+				else
+				{
+					break;
+				}
+			}
+					
+		}  
+		catch (Exception e) {
+			UPM_Configuration_Library.Sound_Beep();
+			e.printStackTrace();
+			Activate_Browsers();
+		}
+			
+		}
+		//ObjDriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);				
 		
+		
+		
+		/*	//ObjDriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+				WebDriverWait Wait = new WebDriverWait(ObjDriver, 60);
+				Activate_Browsers();
+				
+						
+				ExpectedCondition Elementnotdisplayed = new ExpectedCondition<Boolean>()
+						{
+
+							@Override
+							public Boolean apply(WebDriver arg0) {
+								try
+								{
+									final WebElement iconWait = ObjDriver.findElement(By.xpath("//table[@id='confClose_Form1:loadingPanelContentTable']//img"));
+									iconWait.isDisplayed();	
+									return false;
+								
+								}catch(StaleElementReferenceException se)
+								{
+									return true;
+								}catch(NoSuchElementException ne)
+								{
+									return true;
+								}							
+							}
+							};
+							
+							
+				Wait.until(Elementnotdisplayed);
+				
+				
+				*/
+				
+	/*			
+				
+			if(ObjDriver.findElements(By.xpath("//img[@src='/AS/upm/images/loading.gif']")) != null)
+				{	
+			
+					//int size = ObjDriver.findElements(By.xpath("//img[@src='/AS/upm/images/loading.gif']")).size();
+					Wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//table[@id='confClose_Form1:loadingPanelContentTable']//img")));
+				
+				
+				//List<WebElement> DivObj =  ObjDriver.findElements(By.xpath("//img[@src='/AS/upm/images/loading.gif']"));   
+				//int DivObjSize = DivObj.size();
+				
+				//DivObj.get(DivObjSize).isDisplayed();
+				
+				//WebElement WaitDivElement = DivObj.get(DivObjSize);
+				//Wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(WaitDivElement)));
+				}	
+				
+				*/
+				
+	/*	
 		Thread.sleep(1200);
 		Activate_Browsers();
 		List<WebElement> UPM_Div_Objects = null;
@@ -2878,18 +2971,8 @@ public class UPM_Function_Library extends UPM_Page_Library {
 					Thread.sleep(700);
 				}
 			 }
-
-		}
-
-		  catch (StaleElementReferenceException e) {
-			UPM_Configuration_Library.Sound_Beep();
-			e.printStackTrace();
-			Activate_Browsers();
-		} catch (Exception e) {
-			UPM_Configuration_Library.Sound_Beep();
-			e.printStackTrace();
-			Activate_Browsers();
-		}
+*/
+		
 	}
 	
 	public static void wait_for_div_2()
@@ -3761,10 +3844,11 @@ public class UPM_Function_Library extends UPM_Page_Library {
 		}
 	}
 
-	public static void UPM_Direct_Click_Screenshot(String Object_Name_Pro,
-			String Wait_Time, String Desc) throws Exception {
-		if (!Wait_Time.matches("NA")) {
-			//Wait_For_Div();
+	public static void UPM_Direct_Click_Screenshot(String Object_Name_Pro,String Wait_Time, String Desc)throws Exception
+	{
+		if (!Wait_Time.matches("NA")) 
+		{
+			Wait_For_Div();
 
 			try {
 
@@ -3775,28 +3859,33 @@ public class UPM_Function_Library extends UPM_Page_Library {
 					String Actual_Property = Object_Name_Pro.substring(6);
 					UPM_Browser_Element1 = ObjDriver.findElement(By
 							.xpath(Actual_Property));
+					/*
 					for (int i = 0; i <= 10; i++) {
 						if (UPM_Browser_Element1.isDisplayed()) {
-							View_WebElement_Down_Key(Object_Name_Pro, "yes",
-									Desc);
-							Element_Action.moveToElement(UPM_Browser_Element1)
-									.perform();
-							highLightElement(ObjDriver, UPM_Browser_Element1);
+						View_WebElement_Down_Key(Object_Name_Pro, "yes",Desc);
+						Element_Action.moveToElement(UPM_Browser_Element1).perform();
+						highLightElement(ObjDriver, UPM_Browser_Element1);
 							break;
 						}
 						Thread.sleep(100);
 					}
+					
+					*/
 				//	UPM_Browser_Element1 = ObjDriver.findElement(By
 				//			.xpath(Actual_Property));
 					if (UPM_Browser_Element1 != null) {
 						if (!Desc.isEmpty()) {
-							Element_Action
-									.moveToElement(
-											ObjDriver.findElement(By
-													.xpath(Actual_Property)))
-									.click().build().perform();
-							//Wait_For_Div();
-							// Thread.sleep(1000);
+							
+						//	Element_Action.moveToElement(ObjDriver.findElement(By.xpath(Actual_Property))).click().build().perform();
+							
+							UPM_Browser_Element1.click();
+							
+							Wait_For_Div();
+							
+							WebDriverWait wait = new WebDriverWait(ObjDriver,120);
+							wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("InfoMessage")));
+							
+							UPM_Report_Library.Add_Step(UPM_Report_Library.Test_Step_Number, Desc,LogStatus.PASS, true);
 						}
 					}
 
@@ -3810,12 +3899,7 @@ public class UPM_Function_Library extends UPM_Page_Library {
 									LogStatus.FAIL, true);
 							Exception_Content();
 						}
-					} else {
-						Wait_For_Div();
-						UPM_Report_Library.Add_Step(
-								UPM_Report_Library.Test_Step_Number, Desc,
-								LogStatus.PASS, true);
-					}
+					} 
 				}
 			}
 

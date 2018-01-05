@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UPM" parallel="">
+  <test verbose="2" name="DefaultPackage.UPM_Function_Library" annotations="javadoc">
+    <classes>
+      <class name="DefaultPackage.UPM_Function_Library"/>
+    </classes>
+  </test>
+</suite>
